@@ -11,12 +11,13 @@ function ship () {
 } 
 
 return (
+  
     <div>
       <button onClick={ship}>{result.model}</button>
       { shipState !== '' ? 
-      <Card shipState = {shipState}/> : <div> </div>
+       <Card shipState = {shipState}/> : <div> </div>
      }
     </div>
-  
+
 )
 }

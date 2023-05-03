@@ -1,20 +1,38 @@
 
 import './App.css';
-import StarWarsAPI from './srvices/sw-api';
 import StarshipCard from './StarshipCard';
 import {useState, useEffect} from "react";
+import { getShips } from './srvices/sw-api';
 
-function App() {
+export default function App() {
+
+const [ships, setShips] = useState(null);
+
+if (ships === null) {
+ let data = getShips();
+ console.log(data)
+ data.then((temp)=> {
+  if (temp) setShips(temp); 
+  
+ })
+}
+
   return (
     <div className="App">
-      <StarWarsAPI />
+        <div>
+          {
+            ships ?
+            ships.results.map((result) => {
+            return (
+              <StarshipCard result={result}/>
+            )
+            }) : <div> </div>
+          } 
+        </div>
     </div>
   );
 }
 
-export default App;
 
 
-// {starShips ? starShips.results.map((item,idx) => {
-//   return <StarShipCard key={idx} starShips={item} />
-// }) : checkIfExist()}
+
